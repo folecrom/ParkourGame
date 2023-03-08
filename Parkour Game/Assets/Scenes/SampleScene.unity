@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityMultiplier: 1
-  jumpPower: 2
+  jumpPower: 3
   _speed: 5
 --- !u!136 &1714904141
 CapsuleCollider:
