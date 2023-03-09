@@ -12,9 +12,15 @@ public class Slidingmovement : MonoBehaviour
     private float slideTime;
 
     public void Startslide(){
-
+        if (slideTime > 0)
+    {
+        slideTime -= Time.deltaTime;
+        if (slideTime <= 0)
+        {
+            slideTime = 0;
+        }
     }
-
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
