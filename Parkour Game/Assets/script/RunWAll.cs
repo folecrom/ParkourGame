@@ -25,12 +25,10 @@ public class RunWAll : MonoBehaviour
 
     [Header("References")]
     public Transform orientation;
-    private PlayerMovementAdvanced pm ;
     private Rigidbody rb;
 
     private void Start(){
         rb = GetComponent<Rigidbody>();
-        pm = GetComponent<PlayerMovementAdvanced>();
     }
 
     void Update(){
