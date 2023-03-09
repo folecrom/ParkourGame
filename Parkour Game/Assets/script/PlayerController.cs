@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 3.0f;
     [SerializeField] private float _speed = 5.0f;
 
+    [SerializeField] private float _runSpeed = 10.0f;
+
+
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
     }
@@ -52,6 +55,17 @@ public class PlayerController : MonoBehaviour
 
         _velocity = jumpPower;
     }
-
+    public void Run(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+        _speed = _runSpeed;
+        }
+        else if (context.canceled)
+        {
+            _speed = 5.0f;
+        }
+    }
     private bool IsGrounded() => _characterController.isGrounded;
 }
+    
