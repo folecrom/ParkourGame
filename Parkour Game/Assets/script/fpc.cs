@@ -90,7 +90,6 @@ public class fpc : MonoBehaviour
             _speed = 5.0f;
         }
     }
-        public CharacterController controller; // référence au Character Controller
     public float slideSpeed = 5f; // vitesse de glissement
     public float slideDuration = 1f; // durée de glissement
     private float slideTime = 0f; // temps de glissement écoulé
@@ -98,7 +97,7 @@ public class fpc : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl)) // si la touche de glissement est enfoncée
+       /* if (Input.GetKeyDown(KeyCode.LeftControl)) // si la touche de glissement est enfoncée
         {
             if (!isSliding) // si le personnage n'est pas déjà en train de glisser
             {
@@ -119,6 +118,6 @@ public class fpc : MonoBehaviour
                 controller.Move(transform.forward * slideSpeed * Time.deltaTime);
             }
         }
-    }
+   */ }
     private bool IsGrounded() => _characterController.isGrounded;
 }
