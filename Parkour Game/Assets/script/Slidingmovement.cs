@@ -1,32 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class Slidingmovement : MonoBehaviour
 {
-    [Header("Refenrence")]
+    public CharacterController controller; // référence au Character Controller
+    public float slideSpeed = 10f; // vitesse de glissement
+    public float slideDuration = 1f; // durée de glissement
+    private float slideTime = 0f; // temps de glissement écoulé
+    private bool isSliding = false; // est-ce que le personnage est en train de glisser
 
-    [Header("Sliding")]
-    private float maxSlideTime ;
-    private float forceslide;
-    private float slideTime;
-
-    public void Startslide(){
-        if (slideTime > 0)
+    void Update()
     {
-        slideTime -= Time.deltaTime;
-        if (slideTime <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl)) // si la touche de glissement est enfoncée
         {
-            slideTime = 0;
+            if (!isSliding) // si le personnage n'est pas déjà en train de glisser
+            {
+                isSliding = true;
+                slideTime = 0f;
+            }
+        }
+
+        if (isSliding) // si le personnage est en train de glisser
+        {
+            slideTime += Time.deltaTime;
+            if (slideTime > slideDuration) // si la durée de glissement est écoulée
+            {
+                isSliding = false;
+            }
+            else // sinon, faire glisser le personnage
+            {
+                controller.Move(transform.forward * slideSpeed * Time.deltaTime);
+            }
         }
     }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Startslide();
-        }
-    }
-
 }
