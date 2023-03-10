@@ -6,37 +6,44 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Cameraplayer : MonoBehaviour
+
 {
     public float sensitivity = 100f;
     public Transform playerBody;
-    public float RotationX ;
-    public float RotationY ;
+    
+    float mouseX ;
+    float mouseY ;
 
+    float xRotation = 0f;
     Vector2 _input;
     Vector3 _direction;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     void Update()
     {
-         RotationX -= Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-         RotationY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+         mouseX = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+         mouseY = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
-        RotationX = Mathf.Clamp(RotationX, -90f, 90f);
+        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(RotationX, RotationY, 0f);
-        playerBody.Rotate(Vector3.up * RotationX);
+        transform.localRotation = Quaternion.Euler(mouseX, 0f, mouseY);
+        playerBody.Rotate(Vector3.up * mouseY);
+    }
+
+    void FixedUpdate()
+    {
+        _direction = new Vector3(_input.x, 0.0f, _input.y);
+        _direction = transform.TransformDirection(_direction);
+
+        playerBody.transform.position += _direction;
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         _input = context.ReadValue<Vector2>();
-        _direction = new Vector3(_input.x, 0.0f, _input.y);
-        _direction = transform.TransformDirection(_direction);
-
-        playerBody.transform.position += _direction;
     }
 }
