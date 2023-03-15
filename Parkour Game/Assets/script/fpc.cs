@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +6,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class fpc : MonoBehaviour
 {
-    
     [SerializeField] private float gravityMultiplier = 1.0f;
     [SerializeField] private float jumpPower = 3.0f;
     [SerializeField] private float _speed = 2.0f;
@@ -19,10 +19,8 @@ public class fpc : MonoBehaviour
     private float rotationy;
     public float mouseSensitivty = 3f;
     public float maxViewAngle = 90f;
-    //Variable pour les deplacements
     private Vector2 _input;
     private Vector3 _direction;
-    //Variable float 
     private float _velocity;
     private float _gravity = -9.81f;
 
@@ -35,6 +33,7 @@ public class fpc : MonoBehaviour
         CameraMouse();
         ApplyMovement();
         ApplyGravity();
+        IsGrounded();
     }
 
     private void FixedUpdate() {
@@ -74,10 +73,10 @@ public class fpc : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
+        if (context.started) return;
         if (!IsGrounded()) return;
 
-        _velocity = jumpPower;
+        _velocity = jumpPower ;
     }
     public void Run(InputAction.CallbackContext context)
     {
