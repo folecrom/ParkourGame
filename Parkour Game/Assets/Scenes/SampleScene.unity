@@ -1347,7 +1347,7 @@ MonoBehaviour:
   gravityMultiplier: 0.85
   jumpPower: 3
   _speed: 2
-  _runSpeed: 5
+  _runSpeed: 2.96
   playerCamera: {fileID: 633518392}
   mouseSensitivty: 3
   maxViewAngle: 90
@@ -1363,8 +1363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7afb7f610b2eb24db57ceae5b172ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tailleController: 2
+  slideTimerMax: 10
   slideTimer: 1
   slidespeed: 3
+  VueJoueur: {fileID: 0}
   _characterController: {fileID: 1920996397}
 --- !u!1 &2026704764
 GameObject:
