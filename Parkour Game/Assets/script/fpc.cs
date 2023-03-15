@@ -23,6 +23,23 @@ public class fpc : MonoBehaviour
     private Vector3 _direction;
     private float _velocity;
     private float _gravity = -9.81f;
+    [SerializeField] private bool WillSlideOnSlopes = true;
+    [SerializeField] private float slopeSpeed = 8f;
+    private Vector3 hitPointNormal;
+    private bool IsSliding {
+    get{
+        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+        if(_characterController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
+        {
+            hitPointNormal = slopeHit.normal;
+            return Vector3.Angle(hitPointNormal, Vector3.up)>_characterController.slopeLimit;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
 
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
@@ -69,6 +86,9 @@ public class fpc : MonoBehaviour
     private void ApplyMovement()
     {
         _characterController.Move(_direction * _speed * Time.deltaTime);
+        if(WillSlideOnSlopes && IsSliding){
+        _direction += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z)* slopeSpeed;
+    }
     }
 
     public void Jump(InputAction.CallbackContext context)
