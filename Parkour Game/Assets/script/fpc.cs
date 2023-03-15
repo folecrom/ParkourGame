@@ -10,7 +10,7 @@ public class fpc : MonoBehaviour
     [SerializeField] private float jumpPower = 3.0f;
     [SerializeField] private float _speed = 2.0f;
 
-    [SerializeField] private float _runSpeed = 4.0f;
+    [SerializeField] private float _runSpeed = 3.0f;
     //appel du CharacterController
     private CharacterController _characterController;
     // variable pour la camera
