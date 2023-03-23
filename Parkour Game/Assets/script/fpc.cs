@@ -28,7 +28,6 @@ public class fpc : MonoBehaviour
     private Vector3 hitPointNormal;
     private bool IsSliding {
     get{
-        Debug.DrawRay(transform.position, Vector3.down, Color.red);
         if(_characterController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
         {
             hitPointNormal = slopeHit.normal;
