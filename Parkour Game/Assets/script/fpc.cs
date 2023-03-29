@@ -58,9 +58,10 @@ public class fpc : MonoBehaviour
         Vector3 _directionChange = _direction * Time.deltaTime;
         _characterController.Move(_directionChange * Time.deltaTime);
     }
-    public void Deplacements(InputAction.CallbackContext context)
-    {
+    public void Move(InputAction.CallbackContext context)
+    {  
         _input = context.ReadValue<Vector2>();
+        _direction = new Vector3(_input.x, 0.0f, _input.y);
     }
     public void CameraMouse(){
         rotationx = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivty;
