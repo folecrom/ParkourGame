@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 _input;
+    public Vector2 _input;
     private CharacterController _characterController;
 
-    private Vector3 _direction;
+    public Vector3 _direction;
     private float _velocity;
     private float _gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 1.0f;
@@ -64,6 +64,36 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             _speed = 5.0f;
+        }
+    }
+        public CharacterController controller; // référence au Character Controller
+    public float slideSpeed = 5f; // vitesse de glissement
+    public float slideDuration = 1f; // durée de glissement
+    private float slideTime = 0f; // temps de glissement écoulé
+    private bool isSliding = false; // est-ce que le personnage est en train de glisser
+
+    public void Slide(InputAction.CallbackContext context)
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl)) // si la touche de glissement est enfoncée
+        {
+            if (!isSliding) // si le personnage n'est pas déjà en train de glisser
+            {
+                isSliding = true;
+                slideTime = 0f;
+            }
+        }
+
+        if (isSliding) // si le personnage est en train de glisser
+        {
+            slideTime += Time.deltaTime;
+            if (slideTime > slideDuration) // si la durée de glissement est écoulée
+            {
+                isSliding = false;
+            }
+            else // sinon, faire glisser le personnage
+            {
+                controller.Move(transform.forward * slideSpeed * Time.deltaTime);
+            }
         }
     }
     private bool IsGrounded() => _characterController.isGrounded;
