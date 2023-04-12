@@ -101,7 +101,7 @@ public class fpc : MonoBehaviour
         }
         else if (context.canceled)
         {
-            _speed = 2.0f;
+            _speed = 3.0f;
         }
     }
     private bool IsGrounded() => _characterController.isGrounded;
