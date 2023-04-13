@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public enum PanelType{
     None,
     Main,
-    level,
+    Level,
     Option,
     Credits,
 }
