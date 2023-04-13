@@ -1092,6 +1092,7 @@ MonoBehaviour:
   panelsList:
   - {fileID: 1381849231}
   - {fileID: 1461900620}
+  - {fileID: 1077580041}
 --- !u!1 &314975840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,6 +2764,7 @@ GameObject:
   - component: {fileID: 1077580039}
   - component: {fileID: 1077580038}
   - component: {fileID: 1077580041}
+  - component: {fileID: 1077580042}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -2865,6 +2867,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+--- !u!225 &1077580042
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077580036}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1078618101
 GameObject:
   m_ObjectHideFlags: 0
@@ -3428,19 +3442,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 29.3198
       objectReference: {fileID: 0}
     - target: {fileID: 35173876081257201, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.y
