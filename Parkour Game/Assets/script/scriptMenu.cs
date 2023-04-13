@@ -4,21 +4,38 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PanelType{
+    None,
     Name, 
     Main,
-    Settings
+    level,
+    Settings,
+    Credits,
 }
 public class scriptMenu : MonoBehaviour
 {
+    [Header("Panels")]
+    [SerializeField] private List<MenuPanel> panelsList = new List<MenuPanel>();
+    private Dictionary<PanelType, MenuPanel>  panelsDict = new Dictionary<PanelType,MenuPanel>();
+
     private GameManager manager;
 
     private void Start()
     {
         manager =  GameManager.instance;
+
+        foreach (var _panel in panelsList)
+        {
+            if(_panel)panelsDict.Add(_panel.GetPanelType(),_panel);
+        }
+        
     }
 
-    public void OpenPanel(){
-         
+    private void OpenOnePanel(PanelType _type){
+        foreach (var _panel in panelsList) _panel.ChangeState(false);
+        if (_type != PanelType.None) panelsDict[_type].ChangeState(true);
+    }
+    public void OpenPanel(PanelType _type){
+        OpenOnePanel(_type);
     }
     public void ChangeScene(string _sceneName)
     {

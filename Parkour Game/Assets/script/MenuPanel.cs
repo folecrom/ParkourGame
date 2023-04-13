@@ -17,12 +17,12 @@ public class MenuPanel : MonoBehaviour
     private void UpdateState() {
         canvas.enabled = state;
     }
-    private void ChangeState() {
+    public void ChangeState() {
         state = !state;
         UpdateState();
     }
 
-    private void ChangeState(bool _state) {
+    public void ChangeState(bool _state) {
         state = _state;
         UpdateState();
     }
