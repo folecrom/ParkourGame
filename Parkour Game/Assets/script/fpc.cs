@@ -23,8 +23,8 @@ public class fpc : MonoBehaviour
     private Vector3 _direction;
     private float _velocity;
     private float _gravity = -9.81f;
-    [SerializeField] private bool WillSlideOnSlopes = true;
-    [SerializeField] private float slopeSpeed = 8f;
+    //[SerializeField] private bool WillSlideOnSlopes = true;
+   //[SerializeField] private float slopeSpeed = 8f;
     private Vector3 hitPointNormal;
     /*private bool IsSliding {
     get{

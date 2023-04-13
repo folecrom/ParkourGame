@@ -27,7 +27,7 @@ public class scriptMenu : MonoBehaviour
         {
             if(_panel)panelsDict.Add(_panel.GetPanelType(),_panel);
         }
-        
+        OpenOnePanel(PanelType.Main);
     }
 
     private void OpenOnePanel(PanelType _type){
