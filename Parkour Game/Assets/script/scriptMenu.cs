@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public enum PanelType{
     None,
-    Name, 
     Main,
     level,
-    Settings,
+    Option,
     Credits,
 }
 public class scriptMenu : MonoBehaviour
@@ -30,7 +29,7 @@ public class scriptMenu : MonoBehaviour
         OpenOnePanel(PanelType.Main);
     }
 
-    private void OpenOnePanel(PanelType _type){
+    public void OpenOnePanel(PanelType _type){
         foreach (var _panel in panelsList) _panel.ChangeState(false);
         if (_type != PanelType.None) panelsDict[_type].ChangeState(true);
     }
@@ -41,6 +40,7 @@ public class scriptMenu : MonoBehaviour
     {
         manager.ChangeScene(_sceneName);
     }
+
     public void QuitGame()
     {
         manager.QuitGame();

@@ -9,6 +9,7 @@ public class MenuPanel : MonoBehaviour
     private bool state;
 
     private Canvas canvas;
+    private CanvasGroup group;
 
     private void Awake()
     {
