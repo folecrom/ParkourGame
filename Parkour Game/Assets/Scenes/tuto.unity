@@ -317,6 +317,37 @@ Transform:
   m_Father: {fileID: 709480080}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &56602724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56602725}
+  m_Layer: 0
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56602725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56602724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4210609117957745728}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &90655028
 GameObject:
   m_ObjectHideFlags: 0
@@ -9256,3 +9287,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+--- !u!1 &4210609117957745720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4210609119019818980, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+  m_PrefabInstance: {fileID: 4210609117957745719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &4210609117957745721 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 770957627, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+  m_PrefabInstance: {fileID: 4210609117957745719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4210609117957745722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210609117957745720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3dcc498f56955a4abd2796989522fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 0}
+  wallDistance: 0.7
+  minimumJumpHeight: 1.5
+  wallRunGravity: 1
+  wallRunJumpForce: 6
+  cam: {fileID: 4210609117957745721}
+  fov: 90
+  wallRunfov: 100
+  wallRunfovTime: 20
+  camTilt: 20
+  camTiltTime: 20
+--- !u!4 &4210609117957745728 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4210609119020041156, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+  m_PrefabInstance: {fileID: 4210609117957745719}
+  m_PrefabAsset: {fileID: 0}
