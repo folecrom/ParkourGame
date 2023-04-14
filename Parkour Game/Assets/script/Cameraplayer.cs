@@ -14,7 +14,7 @@ public class Cameraplayer : MonoBehaviour
     float mouseX ;
     float mouseY ;
 
-    float xRotation = 0f;
+    //float xRotation = 0f;
     Vector2 _input;
     Vector3 _direction;
 
