@@ -6,10 +6,10 @@ public class Slidingmovement : MonoBehaviour
 {
 [SerializeField] private bool WillSlideOnSlopes = true;
 [SerializeField] private float slopeSpeed = 8f;
-private Vector3 hitPointNormal;
-private Vector3 _direction;
-private Vector2 _input;
-private bool IsSliding {
+public Vector3 hitPointNormal;
+public Vector3 _direction;
+public Vector2 _input;
+public bool IsSliding {
     get{
         if(_characterController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
         {
@@ -38,23 +38,13 @@ private void Awake() {
 }
 
 private void Update(){
-    if(WillSlideOnSlopes && IsSliding){
-        _direction +=new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z)* slopeSpeed;
-    }
-if (Input.GetKey(KeyCode.LeftControl))
-    {
-        StartSlide();
-    }
-    else
-    {
-        StopSlide();
-    }
+    
 }
 
-private void StartSlide(){
+public void StartSlide(){
     _characterController.height = 0.5f;
 }
-private void StopSlide(){
+public void StopSlide(){
     _characterController.height = tailleController;
 }
 private bool IsGrounded() => _characterController.isGrounded;

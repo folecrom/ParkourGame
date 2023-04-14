@@ -46,6 +46,8 @@ public class fpc : MonoBehaviour
     }
 
     private void Update() {
+
+        
         CameraMouse();
         ApplyMovement();
         ApplyGravity();
@@ -102,6 +104,19 @@ public class fpc : MonoBehaviour
         else if (context.canceled)
         {
             _speed = 3.0f;
+        }
+    }
+    public void slide(InputAction.CallbackContext context){
+         if(WillSlideOnSlopes && IsSliding){
+        _direction +=new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z)* slopeSpeed;
+        }
+if (Input.GetKey(KeyCode.LeftControl))
+        {
+        StartSlide();
+        }
+    else
+        {
+        StopSlide();
         }
     }
     private bool IsGrounded() => _characterController.isGrounded;

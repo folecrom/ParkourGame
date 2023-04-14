@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "wallRun",
+                    "type": "Button",
+                    "id": "01cb10f1-19b5-4909-aba1-b556aac16502",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -135,7 +144,7 @@
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse;Touch",
                     "action": "Slide",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "sol",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a84eedb-2945-4d9a-80f1-5d582da8005b",
+                    "path": "<Keyboard>/z",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "wallRun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
