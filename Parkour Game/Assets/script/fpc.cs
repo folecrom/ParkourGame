@@ -49,7 +49,6 @@ public class fpc : MonoBehaviour
         CameraMouse();
         ApplyMovement();
         ApplyGravity();
-        IsGrounded();
     }
 
     private void FixedUpdate() {
