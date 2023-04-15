@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.InputSystem;
 
 
@@ -59,3 +59,4 @@ private void StopSlide(){
 }
 private bool IsGrounded() => _characterController.isGrounded;
 }
+*/
