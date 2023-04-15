@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class result : MonoBehaviour
 {
     public Text resultText;
-    private float bestTime = 0;
+    private float bestTime;
 
     private void Start()
     {
@@ -12,11 +12,5 @@ public class result : MonoBehaviour
         bestTime = PlayerPrefs.GetFloat("BestTime");
         resultText.text = "best time :" + bestTime.ToString("F2") + " secondes";
         resultText.color = Color.green;
-    }
-
-    private void Update()
-    {
-        // Utiliser la valeur de bestTime comme vous le souhaitez
-        Debug.Log(bestTime + " secondes");
     }
 }

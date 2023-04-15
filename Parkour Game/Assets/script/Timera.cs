@@ -15,8 +15,6 @@ public class Timera : MonoBehaviour
     void Start()
     {
         // Charger le meilleur temps précédent depuis les préférences de joueur
-        PlayerPrefs.DeleteKey("BestTime");
-
         startTime = Time.time;
     }
 
@@ -42,11 +40,10 @@ public class Timera : MonoBehaviour
             // Comparaison avec le meilleur temps précédent
             float elapsedTime = Time.time - startTime;
             if (bestTime == 0){
-                resultat = bestTime;
                 PlayerPrefs.SetFloat("BestTime", elapsedTime);
                 PlayerPrefs.Save();
             }
-            else if (elapsedTime < bestTime)
+            else if(elapsedTime < bestTime)
             {
                 bestTime = elapsedTime;
                 resultat = bestTime; // Met à jour la variable resultat avec le meilleur temps actuel
@@ -54,11 +51,6 @@ public class Timera : MonoBehaviour
                 // Sauvegarder le nouveau meilleur temps dans les préférences de joueur
                 PlayerPrefs.SetFloat("BestTime", bestTime);
                 PlayerPrefs.Save(); // Sauvegarder les préférences
-
-                Debug.Log("Nouveau meilleur temps : " + bestTime + " secondes");
-            }
-            else
-            {
                 Debug.Log("Temps actuel : " + elapsedTime + " secondes");
                 Debug.Log("Meilleur temps : " + bestTime + " secondes");
             }
