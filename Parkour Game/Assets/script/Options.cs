@@ -25,11 +25,11 @@ public class Options : MonoBehaviour
         for (var i = 0; i < resolutions.Length; i++)
         {
             _resolutionLabels.Add(resolutions[i].width + "x" + resolutions[i].height);
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) currentResolutionID = i;
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) currentResolutionID = i;
         }
 
         resolutionDropDown.AddOptions(_resolutionLabels);
-        
+
         //Init les valeurs
         resolutionDropDown.value = currentResolutionID;
         fullscreenToggle.isOn = Screen.fullScreen;

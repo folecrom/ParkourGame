@@ -26,7 +26,7 @@ public class Timera : MonoBehaviour
         float t = Time.time - startTime;
         string minutes = ((int)t / 60).ToString();
         string seconds = (t % 60).ToString("f2");
-        timerText.text = "Timer :"+minutes + ":" + seconds;
+        timerText.text = "Timer :" + minutes + ":" + seconds;
         bestTimerText.text = "best time :" + bestTime.ToString("F2") + " secondes";
         bestTimerText.color = Color.green;
     }
@@ -37,7 +37,6 @@ public class Timera : MonoBehaviour
         {
             timerText.color = Color.yellow;
             finished = true;
-
             // Comparaison avec le meilleur temps précédent
             float elapsedTime = Time.time - startTime;
             if (bestTime == 0)
