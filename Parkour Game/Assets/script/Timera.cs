@@ -9,7 +9,6 @@ public class Timera : MonoBehaviour
     public Text bestTimerText;
     private float startTime;
     private bool finished = false;
-    private float resultat;
 
     private float bestTime; // Variable pour stocker le meilleur temps
     void Start()
@@ -49,8 +48,6 @@ public class Timera : MonoBehaviour
             else if (elapsedTime < bestTime)
             {
                 bestTime = elapsedTime;
-                resultat = bestTime; // Met à jour la variable resultat avec le meilleur temps actuel
-                // Sauvegarder le nouveau meilleur temps dans les préférences de joueur
                 PlayerPrefs.SetFloat("BestTime", bestTime);
                 PlayerPrefs.Save(); // Sauvegarder les préférences
                 Debug.Log("Temps actuel : " + elapsedTime + " secondes");
