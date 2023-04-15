@@ -58,6 +58,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1132887469629774474}
+    - target: {fileID: 7506028984785051485, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -161
+      objectReference: {fileID: 0}
     - target: {fileID: 7506028984879813185, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
       propertyPath: m_Name
       value: pauseCanvas
@@ -150,9 +154,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7506028984879813191, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506028984879813191, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506028984879813191, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7506028985153014848, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
       propertyPath: m_Name
       value: resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506028985153014849, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7506028985153014854, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -202,6 +222,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 7506028985433571869, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -93
+      objectReference: {fileID: 0}
     - target: {fileID: 7506028985458198556, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -221,6 +245,10 @@ PrefabInstance:
     - target: {fileID: 7506028985458198556, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506028985458198559, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -302
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2638599197915583460, guid: 4ba26ce82679a244da563ad50ba62e30, type: 3}

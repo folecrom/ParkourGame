@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Timera : MonoBehaviour
 {
     public Text timerText;
+    public Text bestTimerText;
     private float startTime;
     private bool finished = false;
-    public float resultat;
+    private float resultat;
 
-    private float bestTime ; // Variable pour stocker le meilleur temps
-
+    private float bestTime; // Variable pour stocker le meilleur temps
     void Start()
     {
         // Charger le meilleur temps précédent depuis les préférences de joueur
@@ -27,7 +27,9 @@ public class Timera : MonoBehaviour
         float t = Time.time - startTime;
         string minutes = ((int)t / 60).ToString();
         string seconds = (t % 60).ToString("f2");
-        timerText.text = minutes + ":" + seconds;
+        timerText.text = "Timer :"+minutes + ":" + seconds;
+        bestTimerText.text = "best time :" + bestTime.ToString("F2") + " secondes";
+        bestTimerText.color = Color.green;
     }
 
     public void Finish()
@@ -39,15 +41,15 @@ public class Timera : MonoBehaviour
 
             // Comparaison avec le meilleur temps précédent
             float elapsedTime = Time.time - startTime;
-            if (bestTime == 0){
+            if (bestTime == 0)
+            {
                 PlayerPrefs.SetFloat("BestTime", elapsedTime);
                 PlayerPrefs.Save();
             }
-            else if(elapsedTime < bestTime)
+            else if (elapsedTime < bestTime)
             {
                 bestTime = elapsedTime;
                 resultat = bestTime; // Met à jour la variable resultat avec le meilleur temps actuel
-                bestTime = 0; // Réinitialiser le meilleur temps pour la prochaine partie
                 // Sauvegarder le nouveau meilleur temps dans les préférences de joueur
                 PlayerPrefs.SetFloat("BestTime", bestTime);
                 PlayerPrefs.Save(); // Sauvegarder les préférences
