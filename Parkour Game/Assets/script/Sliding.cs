@@ -21,7 +21,7 @@ public class Sliding : MonoBehaviour
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;
-    private bool sliding;
+    
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -38,13 +38,13 @@ private void Update() {
         StartSlide();
         }
         
-    if (Input.GetKeyUp(slideKey) && sliding) {
+    if (Input.GetKeyUp(slideKey) && pm.sliding) {
         StopSlide();
     }
 }
 
 private void FixedUpdate() {
-    if(sliding) {
+    if(pm.sliding) {
         SlidingMouvement();
     }
 
@@ -53,7 +53,7 @@ private void FixedUpdate() {
 
 
 private void StartSlide() {
-    sliding = true;
+    pm.sliding = true;
 
     Adam.localScale = new Vector3(Adam.localScale.x, slideYScale, Adam.localScale.z);
     rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -79,7 +79,7 @@ private void SlidingMouvement() {
 }
 
 private void StopSlide() {
-    sliding = false;
+    pm.sliding = false;
 
     Adam.localScale = new Vector3(Adam.localScale.x, startYScale, Adam.localScale.z);
 }

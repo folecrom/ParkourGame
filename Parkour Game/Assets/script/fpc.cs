@@ -18,8 +18,8 @@ public class fpc : MonoBehaviour
     private float bestMoveSpeed;
     private float lastBestMoveSpeed;
 
-
-
+    public float speedIncreaseMultiplier;
+    public float slopeIncreaseMultiplier;
 
     public float groundDrag;
 
@@ -132,25 +132,35 @@ public class fpc : MonoBehaviour
 
     private void StateHandler()
     {
+        /// State when Sliding
+        if(sliding) {
+            state = MovementState.sliding;
+            if (OnSlope() && rb.velocity.y < 0.1f) {
+                bestMoveSpeed = slideSpeed;
+            }
+            else {
+                bestMoveSpeed = sprintSpeed;
+            }
+        }
         /// State when Crounching
         if (Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
+            bestMoveSpeed = crouchSpeed;
         }
 
         /// State Sprinting
         else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            bestMoveSpeed = sprintSpeed;
         }
 
         /// State walking
         else if (grounded)
         {
             state = MovementState.walking;
-            moveSpeed = walkSpeed;
+            bestMoveSpeed = walkSpeed;
         }
 
         /// State in the air
@@ -158,8 +168,43 @@ public class fpc : MonoBehaviour
         {
             state = MovementState.air;
         }
+
+        /// check if bestMoveSpeed has a significant change
+        if(Mathf.Abs(bestMoveSpeed - lastBestMoveSpeed) > 4f && moveSpeed != 0) {
+            StopAllCoroutines();
+            StartCoroutine(SmoothMoveSpeed());
+        }
+        else {
+            moveSpeed = bestMoveSpeed;
+        }
+
+        lastBestMoveSpeed = bestMoveSpeed;
     }
 
+    private IEnumerator SmoothMoveSpeed() {
+
+        /// slowly decrease speed after building some through slopes
+        float time = 0;
+        float difference = Mathf.Abs(bestMoveSpeed - moveSpeed);
+        float startValue = moveSpeed;
+
+        while (time < difference) {
+            moveSpeed = Mathf.Lerp(startValue, bestMoveSpeed, time / difference);
+            
+            if (OnSlope()) {
+                float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
+                float slopeAngleIncrease = 1 + (slopeAngle/ 90f);
+
+                time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
+            }
+            else{
+                time += Time.deltaTime * speedIncreaseMultiplier;
+            }
+            yield return null;
+        }
+
+        moveSpeed = bestMoveSpeed;
+    }
     private void MovePlayer()
     {
         // calculate movement direction
