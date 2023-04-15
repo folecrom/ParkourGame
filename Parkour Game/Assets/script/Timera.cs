@@ -10,12 +10,12 @@ public class Timera : MonoBehaviour
     private bool finished = false;
     public float resultat;
 
-    public float bestTime; // Variable pour stocker le meilleur temps
+    private float bestTime ; // Variable pour stocker le meilleur temps
 
     void Start()
     {
         // Charger le meilleur temps précédent depuis les préférences de joueur
-        bestTime = PlayerPrefs.GetFloat("BestTime");
+        PlayerPrefs.DeleteKey("BestTime");
 
         startTime = Time.time;
     }
@@ -23,6 +23,7 @@ public class Timera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bestTime = PlayerPrefs.GetFloat("BestTime");
         if (finished)
             return;
         float t = Time.time - startTime;
@@ -40,11 +41,16 @@ public class Timera : MonoBehaviour
 
             // Comparaison avec le meilleur temps précédent
             float elapsedTime = Time.time - startTime;
-            if (elapsedTime < bestTime)
+            if (bestTime == 0){
+                resultat = bestTime;
+                PlayerPrefs.SetFloat("BestTime", elapsedTime);
+                PlayerPrefs.Save();
+            }
+            else if (elapsedTime < bestTime)
             {
                 bestTime = elapsedTime;
                 resultat = bestTime; // Met à jour la variable resultat avec le meilleur temps actuel
-
+                bestTime = 0; // Réinitialiser le meilleur temps pour la prochaine partie
                 // Sauvegarder le nouveau meilleur temps dans les préférences de joueur
                 PlayerPrefs.SetFloat("BestTime", bestTime);
                 PlayerPrefs.Save(); // Sauvegarder les préférences
