@@ -9593,3 +9593,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1427018545}
+  resultat: 0
+  bestTime: 0

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class timer : MonoBehaviour
+public class Timera : MonoBehaviour
 {
     public Text timerText;
     private float startTime;
     private bool finished = false;
     public float resultat;
 
-    private float bestTime; // Variable pour stocker le meilleur temps
+    public float bestTime; // Variable pour stocker le meilleur temps
 
     void Start()
     {
         // Charger le meilleur temps précédent depuis les préférences de joueur
-        bestTime = PlayerPrefs.GetFloat("BestTime", Mathf.Infinity);
+        bestTime = PlayerPrefs.GetFloat("BestTime");
 
         startTime = Time.time;
     }
