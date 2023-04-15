@@ -9,7 +9,7 @@ public class result : MonoBehaviour
     private void Start()
     {
         // Charger la valeur de bestTime depuis les préférences de joueur
-        bestTime = PlayerPrefs.GetFloat("BestTime", Mathf.Infinity);
+        PlayerPrefs.DeleteKey("BestTime");
         resultText.text = "best time :" + bestTime.ToString("F2") + " secondes";
         resultText.color = Color.green;
     }
