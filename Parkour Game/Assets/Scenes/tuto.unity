@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 90655032}
   - component: {fileID: 90655031}
   - component: {fileID: 90655030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 97440096}
   - component: {fileID: 97440095}
   - component: {fileID: 97440094}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 233521516}
   - component: {fileID: 233521515}
   - component: {fileID: 233521514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 267081093}
   - component: {fileID: 267081092}
   - component: {fileID: 267081091}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 274662683}
   - component: {fileID: 274662682}
   - component: {fileID: 274662681}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 277985055}
   - component: {fileID: 277985054}
   - component: {fileID: 277985053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2844,7 +2844,7 @@ GameObject:
   - component: {fileID: 670864091}
   - component: {fileID: 670864090}
   - component: {fileID: 670864089}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3495,7 +3495,7 @@ GameObject:
   - component: {fileID: 796947770}
   - component: {fileID: 796947769}
   - component: {fileID: 796947768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3592,7 +3592,7 @@ GameObject:
   - component: {fileID: 809722709}
   - component: {fileID: 809722708}
   - component: {fileID: 809722707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4016,7 +4016,7 @@ GameObject:
   - component: {fileID: 945445027}
   - component: {fileID: 945445026}
   - component: {fileID: 945445025}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4256,7 +4256,7 @@ GameObject:
   - component: {fileID: 986296502}
   - component: {fileID: 986296501}
   - component: {fileID: 986296500}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4353,7 +4353,7 @@ GameObject:
   - component: {fileID: 1012592243}
   - component: {fileID: 1012592242}
   - component: {fileID: 1012592241}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 1118153615}
   - component: {fileID: 1118153614}
   - component: {fileID: 1118153613}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5522,7 +5522,7 @@ GameObject:
   - component: {fileID: 1212866446}
   - component: {fileID: 1212866445}
   - component: {fileID: 1212866444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5765,7 +5765,7 @@ GameObject:
   - component: {fileID: 1290653607}
   - component: {fileID: 1290653606}
   - component: {fileID: 1290653605}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7680,7 +7680,7 @@ GameObject:
   - component: {fileID: 1490862071}
   - component: {fileID: 1490862070}
   - component: {fileID: 1490862069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7874,7 +7874,7 @@ GameObject:
   - component: {fileID: 1518431415}
   - component: {fileID: 1518431414}
   - component: {fileID: 1518431413}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7971,7 +7971,7 @@ GameObject:
   - component: {fileID: 1535236060}
   - component: {fileID: 1535236059}
   - component: {fileID: 1535236058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8359,7 +8359,7 @@ GameObject:
   - component: {fileID: 1647379935}
   - component: {fileID: 1647379934}
   - component: {fileID: 1647379933}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8941,7 +8941,7 @@ GameObject:
   - component: {fileID: 1794199062}
   - component: {fileID: 1794199061}
   - component: {fileID: 1794199060}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9232,7 +9232,7 @@ GameObject:
   - component: {fileID: 1860682236}
   - component: {fileID: 1860682235}
   - component: {fileID: 1860682234}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9329,7 +9329,7 @@ GameObject:
   - component: {fileID: 1903412573}
   - component: {fileID: 1903412572}
   - component: {fileID: 1903412571}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9815,6 +9815,7 @@ GameObject:
   - component: {fileID: 1970639357}
   - component: {fileID: 1970639358}
   - component: {fileID: 1970639359}
+  - component: {fileID: 1970639360}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -9890,6 +9891,9 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 98437198}
   state: 0
+  freeze: 0
+  unlimited: 0
+  restricted: 0
   sliding: 0
   wallRunning: 0
 --- !u!114 &1970639358
@@ -9936,6 +9940,37 @@ MonoBehaviour:
   wallCheckDistance: 0.7
   minJumpHeight: 2
   orientation: {fileID: 98437198}
+--- !u!114 &1970639360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970639354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc76c87bfcb6d48ad6962dd0497181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pm: {fileID: 1970639357}
+  orientation: {fileID: 98437198}
+  cam: {fileID: 569399018}
+  rb: {fileID: 1970639356}
+  moveToGripSpeed: 12
+  maxGripGrabDistance: 2
+  minTimeOnGrip: 0.5
+  holdGrip: 0
+  jumpKey: 32
+  gripJumpForwardForce: 14
+  gripJumpUpwardForce: 5
+  gripDetectionLength: 3
+  gripSphereCastRadius: 0.5
+  WhatIsGrip:
+    serializedVersion: 2
+    m_Bits: 8704
+  exitingGrip: 0
+  exitGripTime: 0.2
+  exitGripTimer: 0
 --- !u!1 &1971840236
 GameObject:
   m_ObjectHideFlags: 0
@@ -10145,7 +10180,7 @@ GameObject:
   - component: {fileID: 2013831450}
   - component: {fileID: 2013831449}
   - component: {fileID: 2013831448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10436,7 +10471,7 @@ GameObject:
   - component: {fileID: 2061863738}
   - component: {fileID: 2061863737}
   - component: {fileID: 2061863736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grip 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10530,7 +10565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2082025625}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grips
   m_TagString: Untagged
   m_Icon: {fileID: 0}

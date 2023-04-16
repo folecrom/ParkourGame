@@ -32,10 +32,12 @@ public class WallRunning : MonoBehaviour
     public Transform orientation;
     private fpc pm;
     private Rigidbody rb;
+    public Grip gp;
 
     private void Start(){
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<fpc>();
+        gp = GetComponent<Grip>();
     }
 
     private void Update(){
@@ -85,7 +87,7 @@ private void StartWallRun() {
     pm.wallRunning = true;
 }
 private void WallRunningMovement() {
-
+    if(gp.holdGrip || gp.exitingGrip) return;           /// Avoid wallRunning while grabbing grips
     rb.useGravity = false;
     rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
