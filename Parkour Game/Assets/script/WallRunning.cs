@@ -108,7 +108,7 @@ private void StartWallRun() {
     pm.wallRunning = true;
 }
 private void WallRunningMovement() {
-    if(gp.holdGrip || gp.exitingGrip) return;           /// Avoid wallRunning while grabbing grips
+    
     rb.useGravity = false;
     rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -141,10 +141,11 @@ private void StopWallRun() {
 }
 
 private void WallJump() {
+    if(gp.holdGrip || gp.exitingGrip) return;           /// Avoid wallRunning while grabbing grips
     /// Entering " exiting wall" state
     exitingWall = true;
     exitWallTimer = exitWallTime;
-    
+
     Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
     Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
 
