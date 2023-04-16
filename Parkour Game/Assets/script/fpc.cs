@@ -14,6 +14,7 @@ public class fpc : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
+    public float wallRunSpeed;
 
     private float bestMoveSpeed;
     private float lastBestMoveSpeed;
@@ -66,9 +67,12 @@ public class fpc : MonoBehaviour
         sprinting,
         crouching,
         sliding,
+        wallRunning,
         air
     }
     public bool sliding;
+    public bool wallRunning;
+    
 
     private void Start()
     {
@@ -132,6 +136,11 @@ public class fpc : MonoBehaviour
 
     private void StateHandler()
     {
+        /// State when Wall Running
+        if(wallRunning) {
+            state = MovementState.wallRunning;
+            bestMoveSpeed = wallRunSpeed;
+        }
         /// State when Sliding
         if(sliding) {
             state = MovementState.sliding;
