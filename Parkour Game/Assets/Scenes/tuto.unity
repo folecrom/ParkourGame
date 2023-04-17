@@ -9444,7 +9444,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4210609119019818980, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
   m_PrefabInstance: {fileID: 4210609117957745719}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4210609117957745721
+--- !u!20 &4210609117957745721 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 770957627, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+  m_PrefabInstance: {fileID: 4210609117957745719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4210609117957745722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9453,6 +9458,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4210609117957745720}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3dcc498f56955a4abd2796989522fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 0}
+  wallDistance: 0.7
+  minimumJumpHeight: 1.5
+  wallRunGravity: 1
+  wallRunJumpForce: 6
+  cam: {fileID: 4210609117957745721}
+  fov: 90
+  wallRunfov: 100
+  wallRunfovTime: 20
+  camTilt: 20
+  camTiltTime: 20
+--- !u!4 &4210609117957745728 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4210609119020041156, guid: 4b607538dbb2f684da79f654627558e3, type: 3}
+  m_PrefabInstance: {fileID: 4210609117957745719}
+  m_PrefabAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: b7a7aab22e8e6fb4c9ab1300341d007e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
