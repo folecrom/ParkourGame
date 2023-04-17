@@ -34,9 +34,14 @@ public class Grip : MonoBehaviour {
     public float exitGripTime;
     public float exitGripTimer;
 
+    private void start() {
+        rb = GetComponent<Rigidbody>();
+        pm = GetComponent<fpc>();
+    }
     private void Update() {
         GripDetection();
         StateMachine();
+        FreezeBodyOnGrip();
     }
 
     private void StateMachine() {

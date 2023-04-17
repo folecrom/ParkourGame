@@ -9964,7 +9964,7 @@ MonoBehaviour:
   moveToGripSpeed: 12
   maxGripGrabDistance: 2
   minTimeOnGrip: 0.5
-  holdGrip: 0
+  holdGrip: 1
   jumpKey: 32
   gripJumpForwardForce: 14
   gripJumpUpwardForce: 5
