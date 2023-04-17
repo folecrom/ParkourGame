@@ -68,9 +68,7 @@ public class fpc : MonoBehaviour
         crouching,
         sliding,
         wallRunning,
-        air,
-        freeze,
-        unlimited
+        air
     }
     public bool freeze;
     public bool unlimited;
@@ -141,17 +139,17 @@ public class fpc : MonoBehaviour
 
     private void StateHandler()
     {
-        /// State when Freezing player
-        if(freeze) {
-            state = MovementState.freeze;
-            rb.velocity = Vector3.zero;
-        }
-        /// State when unlimited speed is applied to player
-        if(unlimited) {
-            state = MovementState.unlimited;
-            moveSpeed = 969f;
-            return;
-        }
+        // /// State when Freezing player
+        // if(freeze) {
+        //     state = MovementState.freeze;
+        //     rb.velocity = Vector3.zero;
+        // }
+        // /// State when unlimited speed is applied to player
+        // if(unlimited) {
+        //     state = MovementState.unlimited;
+        //     moveSpeed = 969f;
+        //     return;
+        // }
         /// State when Wall Running
         if(wallRunning) {
             state = MovementState.wallRunning;
