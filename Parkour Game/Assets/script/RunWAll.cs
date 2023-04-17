@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,4 +39,4 @@ public class RunWAll : MonoBehaviour
         wallRight = Physics.Raycast(transform.position, orientation.right,out rightWallhit, wallCheckDistance, whatIsWall);
         wallLeft = Physics.Raycast(transform.position, -orientation.right,out leftWallhit, wallCheckDistance, whatIsWall);
     }
-}
+}*/
