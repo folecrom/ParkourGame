@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class playerMovement : MonoBehaviour
+public class pmVersion02 : MonoBehaviour
 {
     //Assingables
     public Transform playerCam;
@@ -18,24 +18,21 @@ public class playerMovement : MonoBehaviour
     private float sensitivity = 50f;
     private float sensMultiplier = 1f;
 
+    public float energy, energyRegen;
     public int health, regen;
     int maxHealth;
+    bool fighting;
 
     //Movement
     public Vector3 inputVector;
     public float moveSpeed = 4500;
-    public bool grounded, onSlope, fullAirControl;
+    public float startBaseSpeed = 15f, baseSpeed;
+    public bool grounded;
     public LayerMask whatIsGround;
 
     public float counterMovement = 0.175f;
     private float threshold = 0.01f;
     public float maxSlopeAngle = 35f;
-
-    //Base speed handling
-    public float startBaseSpeed = 15f, baseSpeed, maxBaseSpeed;
-    public float baseSpeedAccel, baseSpeedDeccel;
-    public float bSAccelPoint, bSDeccelPoint, slowDownPoint;
-    public float dragToSlowDown;
 
     //Crouch & Slide
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
@@ -64,36 +61,34 @@ public class playerMovement : MonoBehaviour
     bool readyToDash;
     int wTapTimes = 0;
 
+    //RocketBoost
+    public float maxRocketTime;
+    public float rocketForce;
+    bool rocketActive, readyToRocket;
+    bool alreadyInvokedRockedStop;
+    float rocketTimer;
+
     //Sliding
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
-    public float slopeDownwardForce;
 
     //Wallrunning
     public LayerMask whatIsWall;
     RaycastHit wallHitR, wallHitL;
     public bool isWallRight, isWallLeft;
     public float maxWallrunTime;
-    public float wallrunForce, wallrunUpwardForce, wallSpeedAdd;
+    public float wallrunForce, wallrunUpwardForce, maxWallSpeed;
     public int wallJumps, wallJumpsLeft;
     public bool readyToWallrun, isWallRunning;
     public bool resetDoubleJumpsOnWall;
-    public GameObject lastWall;
     //CamTilt
     public float maxWallRunCameraTilt;
     public float wallRunCameraTilt = 0;
 
     //Climbing
-    public float climbForce, climbSpeedAdd;
+    public float climbForce, maxClimbSpeed;
     public LayerMask whatIsLadder;
     bool alreadyStoppedAtLadder;
-
-    //Slow-Mo
-    public GameObject slowMoPlane;
-    public float slowMoCooldown, slowMoTime;
-    [Range(0f, 1f)] 
-    public float slowMoStrength;
-    bool readyForSlowMo = true;
 
     //Speed Display
     public float speedRecord;
@@ -109,7 +104,6 @@ public class playerMovement : MonoBehaviour
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        allowDrag = true;
     }
 
     private void FixedUpdate()
@@ -121,6 +115,8 @@ public class playerMovement : MonoBehaviour
         MyInput();
         if (!lockLook) Look();
         CheckForWall();
+
+        EnergyManager();
 
         //Stuff
         if (Input.GetKeyDown(KeyCode.L)) SceneManager.LoadScene(1);
@@ -143,6 +139,18 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) speedRecord = 0;
 
     }
+
+    private void EnergyManager()
+    {
+        if (isWallRunning && energy > 0)
+            energy -= Time.deltaTime * 15;
+
+        if (rocketActive && energy > 0)
+            energy -= Time.deltaTime * 30;
+
+        if (!isWallRunning && !rocketActive && energy < 100)
+            energy += energyRegen * Time.deltaTime;
+    }
     private void MyInput()
     {
         x = Input.GetAxisRaw("Horizontal");
@@ -160,11 +168,6 @@ public class playerMovement : MonoBehaviour
         if (readyToJump && jumping && grounded) Jump();
         //Double Jumping
         if (Input.GetButtonDown("Jump") && !grounded && doubleJumpsLeft >= 1)
-        {
-            Jump();
-        }
-        //Wall jumping
-        if(Input.GetButtonDown("Jump") && wallJumpsLeft >= 1 && isWallRunning)
         {
             Jump();
         }
@@ -186,14 +189,30 @@ public class playerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, orientation.forward, 1, whatIsLadder) && y > .9f)
             Climb();
         else alreadyStoppedAtLadder = false;
-
-        //Slow-Mo
-        if (Input.GetKeyDown(KeyCode.LeftControl) && readyForSlowMo) StartSlowMo();
     }
 
     private void ResetTapTimes()
     {
         wTapTimes = 0;
+    }
+
+    private void StartCrouch()
+    {
+        transform.localScale = crouchScale;
+        transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        if (rb.velocity.magnitude > 0.5f)
+        {
+            if (grounded)
+            {
+                rb.AddForce(orientation.transform.forward * slideForce);
+            }
+        }
+    }
+
+    private void StopCrouch()
+    {
+        transform.localScale = playerScale;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
     private void Movement()
@@ -226,16 +245,11 @@ public class playerMovement : MonoBehaviour
         //Set max speed
         float maxSpeed = this.baseSpeed;
 
-        //Dpn't know, dani had it in his script
+        //If sliding down a ramp, add force down so player stays grounded and also builds speed
         if (crouching && grounded && readyToJump)
         {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
-        }
-        //Build up speed on slope
-        if (crouching && onSlope)
-        {
-            rb.AddForce(Vector3.down * Time.deltaTime * slopeDownwardForce);
         }
 
         //If speed is larger than maxSpeed, cancel out the input so you don't go over max speed
@@ -251,14 +265,10 @@ public class playerMovement : MonoBehaviour
         float multiplier = 1f, multiplierV = 1f;
 
         // Movement in air
-        if (!grounded && !fullAirControl)
+        if (!grounded)
         {
             multiplier = 0.5f;
             multiplierV = 0.5f;
-        }
-        if (fullAirControl)
-        {
-            multiplier = 0.35f;
         }
 
         // Movement while sliding
@@ -268,35 +278,9 @@ public class playerMovement : MonoBehaviour
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
 
-        //Base speed handling (old
-        ///if (rb.velocity.magnitude > baseSpeed - 3) IncreaseBaseSpeed();
-        ///else if (baseSpeed > startBaseSpeed) DecreaseBaseSpeed();
-
         //Base speed handling
-        if (rb.velocity.magnitude > baseSpeed + bSAccelPoint) IncreaseBaseSpeed();
-        if (rb.velocity.magnitude < baseSpeed - bSDeccelPoint) DecreaseBaseSpeed();
-        //Slow down if curr vel reaches slowDownPoint
-        if (rb.velocity.magnitude > baseSpeed + slowDownPoint) SlowDown();
-        else rb.drag = 0;
-    }
-
-    private void StartCrouch()
-    {
-        transform.localScale = crouchScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        if (rb.velocity.magnitude > 0.5f)
-        {
-            if (grounded)
-            {
-                rb.AddForce(orientation.transform.forward * slideForce);
-            }
-        }
-    }
-
-    private void StopCrouch()
-    {
-        transform.localScale = playerScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        if (rb.velocity.magnitude > baseSpeed - 3) IncreaseBaseSpeed();
+        else if (baseSpeed > startBaseSpeed) DecreaseBaseSpeed();
     }
 
     private void Jump()
@@ -317,15 +301,14 @@ public class playerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        if (!grounded && !isWallRunning && doubleJumpsLeft >= 1){
-            
+        if (!grounded && !isWallRunning){
             readyToJump = false;
             doubleJumpsLeft--;
 
-            //Debug.Log("DoubleJump");
+            Debug.Log("DoubleJump");
 
             //Add jump forces
-            rb.AddForce(orientation.forward * jumpForce * 1f);
+            rb.AddForce(orientation.forward * jumpForce * 1.2f);
             rb.AddForce(Vector2.up * jumpForce * 1.7f);
             rb.AddForce(normalVector * jumpForce * 0.7f);
 
@@ -336,10 +319,11 @@ public class playerMovement : MonoBehaviour
         }
 
         //Walljump
-        if (isWallRunning && wallJumpsLeft >= 1)
-        {
+        if (isWallRunning){
+            //Return if no walljumps left
+            if (wallJumpsLeft <= 0) return;
 
-            //Debug.Log("WallJump");
+            Debug.Log("WallJump");
 
             readyToJump = false;
             wallJumpsLeft--;
@@ -378,7 +362,6 @@ public class playerMovement : MonoBehaviour
 
         //Add force
         rb.AddForce(orientation.forward * dashForce);
-        rb.AddForce(orientation.up * dashForce * 0.5f);
     }
 
     float elapsedWallTime;
@@ -404,7 +387,7 @@ public class playerMovement : MonoBehaviour
         //Add upward force
         rb.AddForce(orientation.up * wallrunUpwardForce * Time.deltaTime);
 
-        if (rb.velocity.magnitude <= baseSpeed + wallSpeedAdd)
+        if (rb.velocity.magnitude <= maxWallSpeed)
         {
             rb.AddForce(orientation.forward * wallrunForce * Time.deltaTime);
 
@@ -428,9 +411,9 @@ public class playerMovement : MonoBehaviour
        isWallRight = Physics.Raycast(transform.position, orientation.right, out wallHitR, 1f, whatIsGround);
        isWallLeft = Physics.Raycast(transform.position, -orientation.right, out wallHitL, 1f, whatIsGround);
 
-        //if (!isWallLeft && !isWallRight) wallJumpsLeft = wallJumps;
+        if (!isWallLeft && !isWallRight) wallJumpsLeft = wallJumps;
         if (!isWallLeft && !isWallRight && isWallRunning) StopWallRun();
-        if ((isWallLeft || isWallRight) && resetDoubleJumpsOnWall) doubleJumpsLeft = startDoubleJumps;
+        if (isWallLeft || isWallRight && resetDoubleJumpsOnWall) doubleJumpsLeft = startDoubleJumps;
     }
     private void Climb()
     {
@@ -444,33 +427,11 @@ public class playerMovement : MonoBehaviour
         }
 
         //Push character up
-        if (rb.velocity.magnitude < baseSpeed + climbSpeedAdd)
+        if (rb.velocity.magnitude < maxClimbSpeed)
         rb.AddForce(orientation.up * climbForce * Time.deltaTime);
 
         //Doesn't Push into the wall
         if (!Input.GetKey(KeyCode.S)) y = 0;
-    }
-
-    private void StartSlowMo()
-    {
-        readyForSlowMo = false;
-        slowMoPlane.SetActive(true);
-
-        Time.timeScale = slowMoStrength;
-
-        Invoke(nameof(StopSlowMo), slowMoTime * slowMoStrength);
-    }
-    private void StopSlowMo()
-    {
-        slowMoPlane.SetActive(false);
-
-        Time.timeScale = 1f;
-
-        Invoke(nameof(ResetSlowMo), slowMoCooldown);
-    }
-    private void ResetSlowMo()
-    {
-        readyForSlowMo = true;
     }
 
     private float desiredX;
@@ -506,19 +467,12 @@ public class playerMovement : MonoBehaviour
     }
 
     float timer1, timer2;
-    float extraBaseDeccel; //Exponentially decrease base speed
     private void IncreaseBaseSpeed()
     {
-        if (baseSpeed >= maxBaseSpeed) return;
-
-        ///Debug.Log("Decreasing BaseSpeed");
-
         //Only increase in .1 ticks
-        timer1 += Time.deltaTime * baseSpeedAccel;
+        timer1 += Time.deltaTime * 0.3f;
 
-        extraBaseDeccel = 0;
-
-        if (timer1 > 1f)
+        if (timer1 > 0.1f)
         {
             baseSpeed += 0.1f;
             timer1 = 0;
@@ -526,32 +480,25 @@ public class playerMovement : MonoBehaviour
     }
     private void DecreaseBaseSpeed()
     {
-        if (baseSpeed <= startBaseSpeed) return;
-
-        ///Debug.Log("Increasing BaseSpeed");
-
         //Only decrease in .1 ticks
-        timer2 += Time.deltaTime * baseSpeedDeccel * extraBaseDeccel;
-        extraBaseDeccel += Time.deltaTime * 0.5f;
+        timer2 += Time.deltaTime * 0.6f;
 
-        if (timer2 > 1f)
+        if (timer2 > 0.1f)
         {
             baseSpeed -= 0.1f;
             timer2 = 0;
-        }     
+        }
     }
-
-    private bool allowDrag = true;
     private void SlowDown()
     {
-        //Debug.Log("SlowingDown");
+        Debug.Log("SlowingDown");
 
         ///Vector3 baseVelVector = rb.velocity.normalized * baseSpeed;
 
         ///rb.AddForce(-rb.velocity * 1f * Time.deltaTime, ForceMode.Impulse);
 
-        //Debug.Log("Drag = 1");
-        if (allowDrag) rb.drag = 1;
+        Debug.Log("Drag: " + rb.drag);
+        rb.drag = 2;
     }
     private void CounterMovement(float x, float y, Vector2 mag)
     {
@@ -565,6 +512,14 @@ public class playerMovement : MonoBehaviour
                 rb.velocity = new Vector3(n.x, fallspeed, n.z);
             }
         } */
+
+        //Limit diagonal running. This will also cause a full stop if sliding fast and un-crouching, so not optimal.
+        if (Mathf.Sqrt((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2))) > baseSpeed)
+        {
+            float fallspeed = rb.velocity.y;
+            Vector3 n = rb.velocity.normalized * baseSpeed;
+            rb.velocity = new Vector3(n.x, fallspeed, n.z);
+        }
 
         //if (!grounded || jumping) return; (Dani's settings)
         if (!grounded || jumping || isWallRunning) return;
@@ -585,14 +540,6 @@ public class playerMovement : MonoBehaviour
         if (Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0))
         {
             rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * -mag.y * counterMovement);
-        }
-
-        //Limit diagonal running. This will also cause a full stop if sliding fast and un-crouching, so not optimal.
-        if (Mathf.Sqrt((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2))) > baseSpeed)
-        {
-            float fallspeed = rb.velocity.y;
-            Vector3 n = rb.velocity.normalized * baseSpeed;
-            rb.velocity = new Vector3(n.x, fallspeed, n.z);
         }
     }
 
@@ -622,10 +569,6 @@ public class playerMovement : MonoBehaviour
     private bool cancellingGrounded;
 
     /// Handle ground detection
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(Vector3.Angle(transform.up, collision.contacts[0].normal));
-    }
     private void OnCollisionStay(Collision other)
     {
         //Make sure we are only checking for walkable layers
@@ -639,26 +582,10 @@ public class playerMovement : MonoBehaviour
             //FLOOR
             if (IsFloor(normal))
             {
-                onSlope = false;
                 grounded = true;
                 cancellingGrounded = false;
                 normalVector = normal;
                 CancelInvoke(nameof(StopGrounded));
-            }
-            else
-            {
-                onSlope = true;
-            }
-
-            //Save lastWall
-            if (isWallRunning)
-            {
-                if (lastWall != other.gameObject)
-                {
-                    Debug.Log("WallChanged!");
-                    lastWall = other.gameObject;
-                    wallJumpsLeft = wallJumps;
-                }
             }
         }
 
@@ -681,16 +608,6 @@ public class playerMovement : MonoBehaviour
     public void DashInDirection(Vector3 dir, float force)
     {
         rb.AddForce(dir * force, ForceMode.Impulse);
-    }
-
-    public void PreventDrag(float time)
-    {
-        allowDrag = false;
-        Invoke(nameof(ResetAllowDrag), time);
-    }
-    private void ResetAllowDrag()
-    {
-        allowDrag = true;
     }
 
     #endregion

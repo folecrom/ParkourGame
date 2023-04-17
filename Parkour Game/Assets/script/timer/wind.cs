@@ -12,7 +12,7 @@ public class wind : MonoBehaviour
     private async void OnTriggerEnter(Collider other)
     {
         {
-            GameObject.Find("Adam").SendMessage("Finish");
+            GameObject.Find("playerobj").SendMessage("Finish");
             await Task.Delay(3000); // 3000 ms = 3 secondes
 
             // Charger la scène "MENU"

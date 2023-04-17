@@ -922,7 +922,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &156645607
@@ -3986,19 +3986,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 35173876046376288, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 29.3198
       objectReference: {fileID: 0}
     - target: {fileID: 35173876081257201, guid: 035870e03f7c3a24699ea404712bf309, type: 3}
       propertyPath: m_AnchorMax.y
